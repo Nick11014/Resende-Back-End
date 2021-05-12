@@ -1,9 +1,13 @@
+const { v4: uuidv4 } = require ("uuid");
 const connection = require("../database/connection");
 
 module.exports ={
     async create(category){
-        const result = await connection("category").insert(category);
-        return result;
+        const category_id = uuidv4();
+        category.category_id = category_id;
+
+        await connection("category").insert(category);
+        return category_id;
 },
 
     async getById({category_id, user_id}) {

@@ -1,58 +1,26 @@
 const express = require('express');
 const routes = express.Router();
 
-//200
-//400 erro do cliente
-//500
-//status http
-const grupo4 = [
-    {
-        id: 0,
-        name: "Matheus Menezes",
-    },
-    {
-        id: 1,
-        name: "Ezequiel",
-    },
-    {
-        id: 2,
-        name: "Julia Castro",
-    },
-    {
-        id: 3,
-        name: "Julia Nagem",
-    },
-]
+const UserController = require("./controllers/UserController");
+//const CategoryController = require("./controllers/CategoryController");
+const PerfilController = require("./controllers/PerfilController");
 
+//Users
+routes.get('/users/:user_id', UserController.getById);
+routes.post('/users',UserController.create);
+routes.put('/users/:user_id', UserController.update);
+routes.delete('/users/:user_id', UserController.delete);
 
+//Category
+//routes.get('/category/:category_id', CategoryController.getById);
+//routes.post('/category',CategoryController.create);
+//routes.put('/category/:category_id', CategoryController.update);
+//routes.delete('/category/:category_id', CategoryController.delete);
 
-routes.get('/users', (req,res) => {
-    const query = req.query;
-    console.log(query);
-    res.status(200).json(grupo4);
-});
-
-routes.post('/users', (req,res) => {
-    const newUser = req.body;
-
-    grupo4.push(newUser);
-
-    res.status(200).json({message: "Criado com sucesso"});
-});
-
-routes.put('/users/:userId', (req,res) => {
-    const { userId } = req.params
-    const newFields = req.body;
-
-    let selectedIndex;
-    let selected = grupo4.find((user,index) => {
-        selectedIndex = index;
-        return user.id === userId;
-    });
-    selected = {...selected, ...newFields};
-    
-    grupo4[selectedIndex] = selected;
-    res.status(200).json({message: "Criado com sucesso"});
-});
+// Perfil
+routes.get('/perfil', PerfilController.getById);
+routes.post('/perfil',PerfilController.create);
+routes.put('/perfil/:perfil_id', PerfilController.update);
+routes.delete('/perfil/:perfil_id', PerfilController.delete);
 
 module.exports = routes;
