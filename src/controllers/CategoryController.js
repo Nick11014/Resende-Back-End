@@ -28,40 +28,40 @@ module.exports = {
 
     async update(request,response){
         try{
-            const { category_id } = request.params;
-            const category = request.body;
+            const { perfil_id } = request.params;
+            const newPerfil = request.body;
 
-            await CategoryModel.updateById(category_id,category);
+            await PerfilModel.updateById(perfil_id,newPerfil);
 
 
 
-            return response.status(200).json({ notification: "Category Updated Sucessfully" });
+            return response.status(200).json({ notification: "Perfil Updated Sucessfully" });
         } catch (error){
-            console.warn("Category Update Failed:", error);
+            console.warn("Perfil Update Failed:", error);
 
             return response.status(500).json({
-                notification: " Internal server error while trying to update Category",
+                notification: " Internal server error while trying to update Perfil",
             });  
         }
     },
 
     async delete(request,response){
         try{
-            const { category_id } = request.params;
-            const result = await CategoryModel.deleteById(category_id);
+            const { perfil_id } = request.params;
+            const result = await PerfilModel.deleteById(perfil_id);
 
             if(result == 0){
-                return response.status(400).json({notification: "Category id not found"})
+                return response.status(400).json({notification: "Note id not found"})
             }
 
             return response
             .status(200)
-            .json({ notification: "Category Deleted Sucessfully" });
+            .json({ notification: "Perfil Deleted Sucessfully" });
         } catch (error){
-            console.warn("Category Delete Failed:", error);
+            console.warn("Perfil Delete Failed:", error);
 
             return response.status(500).json({
-                notification: " Internal server error while trying to delete category",
+                notification: " Internal server error while trying to delete Perfil",
             }); 
         }
     },

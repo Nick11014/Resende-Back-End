@@ -20,11 +20,11 @@ module.exports = {
     async getById(request,response){
         try{
             const {user_id} = request.params;
-            const result = await UserModel.getById(user_id);
+            const result = await User.create(user_id);
 
-            return response.status(200).json({result});
+            return response.status(200).json({note_id: result});
         } catch (error){
-            console.warn("Get User Failed:", error);
+            console.warn("User Create Failed:", error);
 
             return response.status(500).json({
                 notification: " Internal server error while trying to get User",
@@ -34,38 +34,40 @@ module.exports = {
 
     async update(request,response){
         try{
-            const {user_id} = request.params;
-            const user = request.body;
-            
-            await UserModel.updateById(user_id,user);
+            const {perfil_id} = request.params;
+            const newPerfil = request.body;
 
-            return response.status(200).json({ notification: "User Updated Sucessfully" });
+            await PerfilModel.updateById(perfil_id,newPerfil);
+
+
+
+            return response.status(200).json({ notification: "Perfil Updated Sucessfully" });
         } catch (error){
-            console.warn("User Update Failed:", error);
+            console.warn("Perfil Update Failed:", error);
 
             return response.status(500).json({
-                notification: " Internal server error while trying to update User",
+                notification: " Internal server error while trying to update Perfil",
             });  
         }
     },
 
     async delete(request,response){
         try{
-            const {user_id} = request.params;
-            const result = await UserModel.deleteById(user_id);
+            const {note_id} = request.params;
+            const result = await PerfilModel.deleteById(Perfil_id);
 
             if(result == 0){
-                return response.status(400).json({notification: "User id not found"})
+                return response.status(400).json({notification: "Note id not found"})
             }
             
             return response
             .status(200)
-            .json({ notification: "User Deleted Sucessfully" });
+            .json({ notification: "Perfil Deleted Sucessfully" });
         } catch (error){
-            console.warn("User Delete Failed:", error);
+            console.warn("Perfil Delete Failed:", error);
 
             return response.status(500).json({
-                notification: " Internal server error while trying to delete User",
+                notification: " Internal server error while trying to delete Perfil",
             }); 
         }
     },
