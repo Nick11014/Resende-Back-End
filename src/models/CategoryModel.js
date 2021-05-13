@@ -18,7 +18,7 @@ module.exports ={
         return  result;
 },
 
-    async updateByID(category_id, category){
+    async updateById(category_id, category){
         const result = await connection("category")
             .where({category_id})
             .update(category);

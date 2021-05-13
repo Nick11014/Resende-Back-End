@@ -53,7 +53,7 @@ module.exports = {
             const result = await PerfilModel.deleteById(perfil_id);
 
             if(result == 0){
-                return response.status(400).json({notification: "Note id not found"})
+                return response.status(400).json({notification: "Perfil id not found"})
             }
 
             return response

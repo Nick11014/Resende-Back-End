@@ -19,7 +19,7 @@ module.exports ={
         return  result;
 },
 
-    async updateByID(perfil_id, perfil){
+    async updateById(perfil_id, perfil){
         const result = await connection("perfil")
             .where({perfil_id})
             .update(perfil);
