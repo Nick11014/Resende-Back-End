@@ -7,8 +7,6 @@ module.exports = {
             const newPerfil = request.body;
             const result = await PerfilModel.create(newPerfil);
 
-
-
             return response.status(200).json({perfil_id: result});
 
         } catch (error){
@@ -20,13 +18,22 @@ module.exports = {
         }
     },
 
-    async getById(request,response){
-        try{
-            
+    async getByUser(request,response){
+        try{  
+            const {user_id} = request.params;
+            const result = await PerfilModel.getByUserWithFilters(user_id, {});
+    
+            return response.status(200).json(result);
+    
         } catch (error){
-             
+            console.warn("Perfil get Failed:", error);
+    
+            return response.status(500).json({
+                notification: " Internal server error while trying to get Perfil by user",
+            });
         }
     },
+    
 
     async update(request,response){
         try{

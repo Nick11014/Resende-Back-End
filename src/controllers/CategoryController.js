@@ -3,11 +3,10 @@ const CategoryModel = require("../models/CategoryModel");
 module.exports = {
     async create(request,response){
         try{  
-            const {category_id} = request.params;
             const category = request.body;
             const result = await CategoryModel.create(category);
 
-            return response.status(200).json({category_id: result});
+            return response.status(200).json(result);
 
         } catch (error){
             console.warn("Category Create Failed:", error);

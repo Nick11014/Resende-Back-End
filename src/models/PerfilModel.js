@@ -19,7 +19,25 @@ module.exports ={
         return  result;
 },
 
-    async updateByID(perfil_id, perfil){
+
+    async getByUserWithFilters(user_id,{ categoryName }){
+        const filter ={"perfil.user_id":user_id};
+
+        const result = await connection("perfil")
+            .innerJoin(
+                "perfil_category",
+                "perfil.perfil_id",
+                "perfil_category.perfil_id")
+            .innerJoin(
+                "category",
+                "category.category_id",
+                "perfil_category.category_id")
+            .where({filter})
+            .select("*")
+    return  result;
+},
+
+    async updateById(perfil_id, perfil){
         const result = await connection("perfil")
             .where({perfil_id})
             .update(perfil);

@@ -12,14 +12,14 @@ routes.put('/users/:user_id', UserController.update);
 routes.delete('/users/:user_id', UserController.delete);
 
 //Category
-routes.get('/category/:category_id', CategoryController.getById);
 routes.post('/category',CategoryController.create);
+routes.get('/category/:category_id', CategoryController.getById);
 routes.put('/category/:category_id', CategoryController.update);
 routes.delete('/category/:category_id', CategoryController.delete);
 
 // Perfil
-routes.get('/perfil', PerfilController.getById);
 routes.post('/perfil',PerfilController.create);
+routes.get('/perfil/:user_id', PerfilController.getByUser);
 routes.put('/perfil/:perfil_id', PerfilController.update);
 routes.delete('/perfil/:perfil_id', PerfilController.delete);
 
