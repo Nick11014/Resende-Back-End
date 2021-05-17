@@ -1,5 +1,6 @@
 const UserModel = require("../models/UserModel");
 
+
 module.exports = {
     async create(request,response){
         try{  

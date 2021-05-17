@@ -4,6 +4,7 @@ exports.up = function(knex) {
       table.string("perfil_id").primary().notNullable();
       table.string("user_id").notNullable(); 
       table.foreign("user_id").references("user_id").inTable("user").onDelete("cascade");   
+      table.string("NomeEmp").notNullable();
       table.string("aae").notNullable();
       table.string("tel").notNullable();    
       table.string("end").notNullable();
