@@ -14,7 +14,7 @@ module.exports = {
             return response.status(401).json({ error: 'Token badformatted' });
 
         const validToken = await new Promise((res)=> {
-            jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err,user) => {
+            jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err,data) => {
                 if (err) return res(false);
                    
                 request.session = data;
