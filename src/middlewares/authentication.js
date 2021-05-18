@@ -1,31 +1,28 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 module.exports = {
-    async authenticateToken(request, response, next) {
-        const authHeader = request.headers.authorization;
-        const [scheme, token] = authHeader 
-        ? authHeader.split(' ')
-        : [undefined, undefined];
+  async authenticateToken(request, response, next) {
+    const authHeader = request.headers["authorization"];
+    const [scheme, token] = authHeader && authHeader.split(" ");
 
-        if (!token || token === null) 
-            return response.status(401).json({ error: 'No token provided' });
+    if (token === null)
+      return response.status(401).json({ error: "No token provided" });
 
-        if (!/^Bearer$/i.test(scheme))
-            return response.status(401).json({ error: 'Token badformatted' });
+    if (!/^Bearer$/i.test(scheme))
+      return response.status(401).json({ error: "Token badformatted" });
 
-        const validToken = await new Promise((res)=> {
-            jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err,data) => {
-                if (err) return res(false);
-                   
-                request.session = data;
-                
-                return res(true);
-            });
-        });
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
+      if (err) {
+        console.log(err);
+        return response
+          .status(403)
+          .json({ error: "Invalid authorization token" });
+      }
 
-        if (validToken) return next();
-        return response.status(403).json({ error: 'Invalid authorization token' });
-        
-                   
-    },
+      request.session = data;
+      console.log("🚀 ~ file: authentication.js ~ line 23 ~ jwt.verify ~ data", data)
+
+      next();
+    });
+  },
 };

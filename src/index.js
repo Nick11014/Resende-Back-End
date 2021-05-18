@@ -1,10 +1,10 @@
 require("dotenv").config();
 
-const express = require ('express');
-const cors = require ('cors');
-const { errors } = require('celebrate');
+const express = require("express");
+const cors = require("cors");
+const { errors } = require("celebrate");
 
-const routes = require('./routes');
+const routes = require("./routes");
 
 const port = process.env.PORT || 3333;
 
@@ -16,6 +16,6 @@ app.use(routes);
 
 app.use(errors());
 
-app.listen(port,()=>{
-    console.log('Server listening on port: ' + port)
-})
+app.listen(port, () => {
+  console.log("Server listening on port: " + port);
+});
