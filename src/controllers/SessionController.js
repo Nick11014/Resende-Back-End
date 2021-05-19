@@ -19,11 +19,12 @@ module.exports = {
 
       const user = await UserModel.getByFields({ firebase_id: firebaseId });
 
-      const accessToken = jwt.sign({ user }, process.env.ACESS_TOKEN_SECRET, {
+      const accessToken = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "30d",
       });
       return response.status(200).json({ user, accessToken });
     } catch (error) {
+      console.error(error);
       return response
         .status(500)
         .json({ message: "Error while trying to validate credentials" });
