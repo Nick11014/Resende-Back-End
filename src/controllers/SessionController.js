@@ -11,6 +11,7 @@ module.exports = {
       try {
         firebaseId = await Firebase.login(email, password);
       } catch (error) {
+        console.error(error);
         return response
           .status(403)
           .json({ notification: "Invalid Credentials" });
