@@ -13,7 +13,7 @@ routes.post("/login", SessionController.signIn);
 
 //Users
 routes.get("/users/:user_id", UserValidator.getById, UserController.getById);
-routes.post("/users", UserValidator.create, UserController.create);
+routes.post("/cadastro", UserValidator.create, UserController.create);
 routes.put("/users/:user_id", UserValidator.update,auth.authenticateToken, UserController.update);
 routes.delete("/users/:user_id", UserValidator.delete,auth.authenticateToken, UserController.delete);
 
