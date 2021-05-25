@@ -40,9 +40,9 @@ module.exports = {
     try {
       const { user_id } = request.params;
       const user = request.body;
-
+      console.log("🚀 ~ file: UserController.js ~ line 56 ~ update ~ response", response);
       await UserModel.updateById(user_id, user);
-
+      
       return response
         .status(200)
         .json({ notification: "User Updated Sucessfully" });
