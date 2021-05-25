@@ -20,8 +20,6 @@ module.exports = {
       }
 
       request.session = data;
-      console.log("🚀 ~ file: authentication.js ~ line 23 ~ jwt.verify ~ data", data)
-
       next();
     });
   },

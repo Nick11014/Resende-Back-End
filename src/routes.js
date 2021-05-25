@@ -12,9 +12,9 @@ const SessionController = require("./controllers/SessionController");
 routes.post("/login", SessionController.signIn);
 
 //Users
-routes.get("/users/:user_id", UserValidator.getById, UserController.getById);
+routes.get("/users/:user_id", UserValidator.getById,auth.authenticateToken, UserController.getById);
 routes.post("/cadastro", UserValidator.create, UserController.create);
-routes.put("/users/:user_id", UserValidator.update,auth.authenticateToken, UserController.update);
-routes.delete("/users/:user_id", UserValidator.delete,auth.authenticateToken, UserController.delete);
+routes.put("/alterarperfil/:user_id", UserValidator.update,auth.authenticateToken, UserController.update);
+routes.delete("/deletarusuario/:user_id", UserValidator.delete,auth.authenticateToken, UserController.delete);
 
 module.exports = routes;

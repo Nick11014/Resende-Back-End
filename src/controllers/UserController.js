@@ -27,12 +27,11 @@ module.exports = {
       const { user_id } = request.params;
       const result = await UserModel.getById(user_id);
 
-      return response.status(200).json({ result });
-    } catch (error) {
-      console.warn("Get User Failed:", error);
-
+      return response.status(200).json(result);
+    } catch (err) {
+      console.log("User getById failed: " + err);
       return response.status(500).json({
-        notification: " Internal server error while trying to get User",
+        notification: "Internal server error while trying to get User",
       });
     }
   },
